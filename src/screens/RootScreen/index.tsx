@@ -1,67 +1,41 @@
 import {
-  Box,
-  Center,
-  Heading,
   HStack,
-  Link,
   Switch,
   Text,
   useColorMode,
   VStack,
   ScrollView,
-  View,
 } from "native-base";
 import React from "react";
 import { usePosts } from "../../api/post/query";
-import NativeBaseIcon from "../../components/NativeBaseIcon";
+import { Post } from "../../api/post/type";
 import PostCard from "../../components/cards/PostCard";
-import { Post } from "../../api/post";
 import BottomTab from "../../components/layout/BottomTab";
 
 export default function RootScreen() {
   const { data } = usePosts();
 
   if (!data) return null;
+
+  const dataWithThumbnail = data.filter((e: Post) => !!e.thumbnail);
+
   return (
-    <Center w="100%" height="100%">
+    <VStack w="100%" h="100%" safeArea justifyContent="space-between" flex={1}>
       <ScrollView
         _dark={{ bg: "blueGray.900" }}
         _light={{ bg: "blueGray.50" }}
         px={4}
         flex={1}
       >
-        <VStack space={3} alignItems="center" safeArea>
-          {data.slice(0, 3).map((e: Post) => (
+        <VStack space={5} alignItems="center" mx={1}>
+          {dataWithThumbnail.slice(0, 10).map((e: Post) => (
             <PostCard post={e} key={e.title} />
           ))}
-          {/*<HStack space={2} alignItems="center">*/}
-          {/*  <Text>Edit</Text>*/}
-          {/*  <Box*/}
-          {/*    _web={{*/}
-          {/*      _text: {*/}
-          {/*        fontFamily: "monospace",*/}
-          {/*        fontSize: "sm",*/}
-          {/*      },*/}
-          {/*    }}*/}
-          {/*    px={2}*/}
-          {/*    py={1}*/}
-          {/*    _dark={{ bg: "blueGray.800" }}*/}
-          {/*    _light={{ bg: "blueGray.200" }}*/}
-          {/*  >*/}
-          {/*    App.js*/}
-          {/*  </Box>*/}
-          {/*  <Text>and save to reload.</Text>*/}
-          {/*</HStack>*/}
-          {/*<Link href="https://docs.nativebase.io" isExternal>*/}
-          {/*  <Text color="primary.500" underline fontSize={"xl"}>*/}
-          {/*    Learn NativeBase*/}
-          {/*  </Text>*/}
-          {/*</Link>*/}
           <ToggleDarkMode />
         </VStack>
       </ScrollView>
       <BottomTab />
-    </Center>
+    </VStack>
   );
 }
 

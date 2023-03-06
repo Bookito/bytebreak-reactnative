@@ -1,16 +1,15 @@
 import React from "react";
 import {
-  Card,
   Box,
   AspectRatio,
-  Center,
   Heading,
   HStack,
   Stack,
   Image,
   Text,
+  Avatar,
 } from "native-base";
-import { Post } from "../../api/post";
+import { Post } from "../../api/post/type";
 
 interface Props {
   post: Post;
@@ -19,8 +18,6 @@ interface Props {
 const PostCard = ({ post }: Props) => {
   const { title, blogName, link, thumbnail, publishedDate, postOwner } = post;
 
-  const description = "디스크립션란";
-  const category = "카테고리란";
   const defaultThumbnail = thumbnail
     ? thumbnail
     : "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg";
@@ -28,8 +25,9 @@ const PostCard = ({ post }: Props) => {
     "https://cdn.pixabay.com/photo/2016/08/09/17/52/instagram-1581266_960_720.jpg";
 
   return (
-    <Box alignItems="center">
+    <Box alignItems="center" w="100%" position="relative">
       <Box
+        w="100%"
         rounded="lg"
         overflow="hidden"
         borderColor="coolGray.200"
@@ -55,24 +53,6 @@ const PostCard = ({ post }: Props) => {
               alt="image"
             />
           </AspectRatio>
-          <Center
-            bg="violet.500"
-            _dark={{
-              bg: "violet.400",
-            }}
-            _text={{
-              color: "warmGray.50",
-              fontWeight: "700",
-              fontSize: "xs",
-            }}
-            position="absolute"
-            right="0"
-            bottom="0"
-            px="3"
-            py="1.5"
-          >
-            PHOTOS
-          </Center>
         </Box>
         <Stack p="4" space={3}>
           <Stack space={2}>
@@ -127,6 +107,27 @@ const PostCard = ({ post }: Props) => {
           </HStack>
         </Stack>
       </Box>
+      <Avatar
+        position="absolute"
+        right="16px"
+        top="172px"
+        borderWidth="4px"
+        source={{
+          uri: defaultLog,
+        }}
+        _dark={{
+          borderColor: "coolGray.600",
+          backgroundColor: "gray.700",
+        }}
+        _web={{
+          shadow: 2,
+          borderWidth: 0,
+        }}
+        _light={{
+          backgroundColor: "gray.50",
+          borderColor: "gray.50",
+        }}
+      />
     </Box>
   );
 };

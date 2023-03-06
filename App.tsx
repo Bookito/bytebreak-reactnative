@@ -1,19 +1,5 @@
 import React from "react";
-import {
-  Text,
-  Link,
-  HStack,
-  Center,
-  Heading,
-  Switch,
-  useColorMode,
-  NativeBaseProvider,
-  extendTheme,
-  VStack,
-  Box,
-} from "native-base";
-import NativeBaseIcon from "./src/components/NativeBaseIcon";
-import { usePosts } from "./src/api/post/query";
+import { NativeBaseProvider, extendTheme } from "native-base";
 import { QueryCache, QueryClient, QueryClientProvider } from "react-query";
 import RootScreen from "./src/screens/RootScreen";
 
