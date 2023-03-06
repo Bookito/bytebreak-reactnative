@@ -1,75 +1,134 @@
 import React from "react";
-import { View, Text, Image, TouchableHighlight } from "react-native";
-import { Card, Box } from "native-base";
+import {
+  Card,
+  Box,
+  AspectRatio,
+  Center,
+  Heading,
+  HStack,
+  Stack,
+  Image,
+  Text,
+} from "native-base";
+import { Post } from "../../api/post";
 
 interface Props {
-  imageUri: string;
-  title: string;
-  description: string;
-  channelLogoUri: string;
-  channelName: string;
-  category: string;
+  post: Post;
 }
 
-const PostCard = ({
-  imageUri,
-  title,
-  description,
-  channelLogoUri,
-  channelName,
-  category,
-}: Props) => {
+const PostCard = ({ post }: Props) => {
+  const { title, blogName, link, thumbnail, publishedDate, postOwner } = post;
+
+  const description = "디스크립션란";
+  const category = "카테고리란";
+  const defaultThumbnail = thumbnail
+    ? thumbnail
+    : "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg";
+  const defaultLog =
+    "https://cdn.pixabay.com/photo/2016/08/09/17/52/instagram-1581266_960_720.jpg";
+
   return (
-    <Card>
-      <TouchableHighlight onPress={() => console.log("Button pressed")}>
+    <Box alignItems="center">
+      <Box
+        maxW="80"
+        rounded="lg"
+        overflow="hidden"
+        borderColor="coolGray.200"
+        borderWidth="1"
+        _dark={{
+          borderColor: "coolGray.600",
+          backgroundColor: "gray.700",
+        }}
+        _web={{
+          shadow: 2,
+          borderWidth: 0,
+        }}
+        _light={{
+          backgroundColor: "gray.50",
+        }}
+      >
         <Box>
-          <Box style={{ flexDirection: "row", alignItems: "center" }}>
+          <AspectRatio w="100%" ratio={16 / 9}>
             <Image
-              source={{ uri: imageUri }}
-              style={{
-                width: 100,
-                height: 100,
-                resizeMode: "cover",
-                marginRight: 10,
+              source={{
+                uri: defaultThumbnail,
               }}
+              alt="image"
             />
-            <View style={{ flex: 1 }}>
-              <Text style={{ fontWeight: "bold", fontSize: 16 }}>{title}</Text>
-              <Text numberOfLines={2} style={{ marginTop: 5 }}>
-                {description}
-              </Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginTop: 5,
-                }}
-              >
-                <Image
-                  source={{ uri: channelLogoUri }}
-                  style={{
-                    width: 20,
-                    height: 20,
-                    resizeMode: "contain",
-                    marginRight: 5,
-                  }}
-                />
-                <Text style={{ fontSize: 12 }}>{channelName}</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginTop: 5,
-                }}
-              >
-                <Text style={{ fontSize: 12 }}>{category}</Text>
-              </View>
-            </View>
-          </Box>
+          </AspectRatio>
+          <Center
+            bg="violet.500"
+            _dark={{
+              bg: "violet.400",
+            }}
+            _text={{
+              color: "warmGray.50",
+              fontWeight: "700",
+              fontSize: "xs",
+            }}
+            position="absolute"
+            right="0"
+            bottom="0"
+            px="3"
+            py="1.5"
+          >
+            PHOTOS
+          </Center>
         </Box>
-      </TouchableHighlight>
-    </Card>
+        <Stack p="4" space={3}>
+          <Stack space={2}>
+            <Heading size="md" ml="-1">
+              {title}
+            </Heading>
+            <HStack alignItems="center" space={3}>
+              {!!postOwner && (
+                <Text
+                  fontSize="xs"
+                  _light={{
+                    color: "violet.500",
+                  }}
+                  _dark={{
+                    color: "violet.400",
+                  }}
+                  fontWeight="500"
+                  ml="-0.5"
+                  mt="-1"
+                >
+                  {postOwner}
+                </Text>
+              )}
+              <Text
+                fontSize="xs"
+                _light={{
+                  color: "violet.500",
+                }}
+                _dark={{
+                  color: "violet.400",
+                }}
+                fontWeight="500"
+                ml="-0.5"
+                mt="-1"
+              >
+                {blogName}
+              </Text>
+            </HStack>
+          </Stack>
+          <HStack alignItems="center" space={4} justifyContent="space-between">
+            <HStack alignItems="center">
+              <Text
+                color="coolGray.600"
+                _dark={{
+                  color: "warmGray.200",
+                }}
+                fontWeight="400"
+              >
+                {publishedDate}
+              </Text>
+            </HStack>
+          </HStack>
+        </Stack>
+      </Box>
+    </Box>
   );
 };
 
