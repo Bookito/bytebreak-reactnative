@@ -30,7 +30,6 @@ const PostCard = ({ post }: Props) => {
   return (
     <Box alignItems="center">
       <Box
-        maxW="80"
         rounded="lg"
         overflow="hidden"
         borderColor="coolGray.200"
