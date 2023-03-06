@@ -14,9 +14,7 @@ import { usePosts } from "../../api/post/query";
 import NativeBaseIcon from "../../components/NativeBaseIcon";
 
 export default function RootScreen() {
-  const data = usePosts();
-
-  console.log(data);
+  const { data } = usePosts();
 
   return (
     <Center

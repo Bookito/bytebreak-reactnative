@@ -6,8 +6,7 @@ import { GET_POSTS } from "../queryKey";
 export const usePosts = () => {
   return useQuery(GET_POSTS, getPosts, {
     select: (response: AxiosResponse) => {
-      console.log(response);
-      return response;
+      return response.data.posts;
     },
   });
 };
