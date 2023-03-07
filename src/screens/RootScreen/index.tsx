@@ -27,11 +27,20 @@ const RootScreen = () => {
   };
 
   return (
-    <VStack w="100%" h="100%" safeArea justifyContent="space-between" flex={1}>
+    <VStack
+      w="100%"
+      h="100%"
+      safeArea
+      justifyContent="space-between"
+      flex={1}
+      _dark={{ bg: "blueGray.900" }}
+      _light={{ bg: "blueGray.50" }}
+    >
       <ScrollView
         _dark={{ bg: "blueGray.900" }}
         _light={{ bg: "blueGray.50" }}
         px={4}
+        pt={4}
         flex={1}
       >
         <VStack space={5} alignItems="center" mx={1}>

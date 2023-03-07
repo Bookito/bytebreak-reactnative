@@ -1,22 +1,28 @@
 import React from "react";
 import { WebView } from "react-native-webview";
 import { RouteProp, useNavigation } from "@react-navigation/native";
-import { ParamListBase } from "@react-navigation/routers";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../../App";
 
-type WebViewScreenRouteProp = RouteProp<ParamListBase, "WebView">;
+type WebViewScreenRouteProp = RouteProp<RootStackParamList, "WebView">;
+
+type WebViewScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "WebView"
+>;
 
 type WebViewScreenProps = {
   route: WebViewScreenRouteProp & {
     params: {
       url: string;
-      title: string;
+      title?: string; // title 프로퍼티를 선택적으로 만듦
     };
   };
+  navigation: WebViewScreenNavigationProp;
 };
 
-const WebViewScreen = ({ route }: WebViewScreenProps) => {
+const WebViewScreen: React.FC<WebViewScreenProps> = ({ route, navigation }) => {
   const { url, title } = route.params;
-  const navigation = useNavigation();
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
