@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import {
   HStack,
   Switch,
@@ -12,12 +13,18 @@ import { Post } from "../../api/post/type";
 import PostCard from "../../components/cards/PostCard";
 import BottomTab from "../../components/layout/BottomTab";
 
-export default function RootScreen() {
+const RootScreen = () => {
   const { data } = usePosts();
+  const navigation = useNavigation();
 
   if (!data) return null;
 
   const dataWithThumbnail = data.filter((e: Post) => !!e.thumbnail);
+
+  const handlePress = (url: string) => {
+    // @ts-ignore
+    navigation.navigate("WebView", { url });
+  };
 
   return (
     <VStack w="100%" h="100%" safeArea justifyContent="space-between" flex={1}>
@@ -29,7 +36,11 @@ export default function RootScreen() {
       >
         <VStack space={5} alignItems="center" mx={1}>
           {dataWithThumbnail.slice(0, 10).map((e: Post) => (
-            <PostCard post={e} key={e.title} />
+            <PostCard
+              post={e}
+              key={e.title}
+              onPress={() => handlePress(e.link)}
+            />
           ))}
           <ToggleDarkMode />
         </VStack>
@@ -37,7 +48,7 @@ export default function RootScreen() {
       <BottomTab />
     </VStack>
   );
-}
+};
 
 // Color Switch Component
 function ToggleDarkMode() {
@@ -56,3 +67,5 @@ function ToggleDarkMode() {
     </HStack>
   );
 }
+
+export default RootScreen;

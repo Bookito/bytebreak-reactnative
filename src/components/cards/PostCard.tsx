@@ -8,15 +8,30 @@ import {
   Image,
   Text,
   Avatar,
+  Pressable,
 } from "native-base";
 import { Post } from "../../api/post/type";
 
 interface Props {
   post: Post;
+  onPress: () => void;
 }
 
-const PostCard = ({ post }: Props) => {
+const PostCard = ({ post, onPress }: Props) => {
   const { title, blogName, link, thumbnail, publishedDate, postOwner } = post;
+
+  const logos = {
+    Google:
+      "https://cdn.pixabay.com/photo/2017/01/19/09/11/logo-google-1991840_640.png",
+    Meta: "https://cdn.pixabay.com/photo/2017/06/22/06/22/facebook-2429746_640.png",
+    Instagram:
+      "https://cdn.pixabay.com/photo/2016/08/09/17/52/instagram-1581266_960_720.jpg",
+  };
+
+  const thumbnails = {
+    LinkedIn:
+      "https://cdn.pixabay.com/photo/2018/06/28/22/10/linkedin-3504899_640.jpg",
+  };
 
   const defaultThumbnail = thumbnail
     ? thumbnail
@@ -25,7 +40,12 @@ const PostCard = ({ post }: Props) => {
     "https://cdn.pixabay.com/photo/2016/08/09/17/52/instagram-1581266_960_720.jpg";
 
   return (
-    <Box alignItems="center" w="100%" position="relative">
+    <Pressable
+      alignItems="center"
+      w="100%"
+      position="relative"
+      onPress={onPress}
+    >
       <Box
         w="100%"
         rounded="lg"
@@ -59,7 +79,7 @@ const PostCard = ({ post }: Props) => {
             <Heading size="md" ml="-1">
               {title}
             </Heading>
-            <HStack alignItems="center" space={3}>
+            <HStack alignItems="center" space={3} maxW="100%">
               {!!postOwner && (
                 <Text
                   fontSize="xs"
@@ -113,7 +133,7 @@ const PostCard = ({ post }: Props) => {
         top="172px"
         borderWidth="4px"
         source={{
-          uri: defaultLog,
+          uri: "https://cdn.pixabay.com/photo/2017/01/19/09/11/logo-google-1991840_640.png",
         }}
         _dark={{
           borderColor: "coolGray.600",
@@ -128,7 +148,7 @@ const PostCard = ({ post }: Props) => {
           borderColor: "gray.50",
         }}
       />
-    </Box>
+    </Pressable>
   );
 };
 
