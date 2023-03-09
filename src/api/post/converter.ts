@@ -1,24 +1,17 @@
-import moment from "moment";
+import moment from "moment-timezone";
 import { Post } from "./type";
 
-export const sortAndFormat = (list: Post[]): Post[] => {
-  const dateFormatter = "MM/DD/YYYY";
+const inputFormat = "YYYY-MM-DDTHH:mm:ss.SSSZ";
 
+export const sortAndFormat = (list: Post[]): Post[] => {
   list.sort((a: Post, b: Post) => {
-    const dateA =
-      moment(a.publishedDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").unix() || 0;
-    const dateB =
-      moment(b.publishedDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").unix() || 0;
+    const dateA = moment(a.publishedDate, inputFormat).unix() || 0;
+    const dateB = moment(b.publishedDate, inputFormat).unix() || 0;
 
     return dateB - dateA;
   });
 
-  list.forEach((item: Post) => {
-    item.publishedDate = moment(
-      item.publishedDate,
-      "YYYY-MM-DDTHH:mm:ss.SSSZ"
-    ).format(dateFormatter);
-  });
-
   return list;
 };
+
+

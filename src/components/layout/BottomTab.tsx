@@ -5,8 +5,8 @@ import { FontAwesome5 } from "@expo/vector-icons";
 const BottomTab = () => {
   const [selected, setSelected] = React.useState(1);
   return (
-    <Box bg="white" width="100%" alignSelf="center">
-      <HStack bg="indigo.600" alignItems="center" shadow={6}>
+    <Box bg="warmGray.400" width="100%" alignSelf="center" shadow={4}>
+      <HStack bg="warmGray.400" alignItems="center">
         <Pressable
           opacity={selected === 0 ? 1 : 0.5}
           py="2"

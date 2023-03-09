@@ -30,7 +30,7 @@ const RootScreen = () => {
     <VStack
       w="100%"
       h="100%"
-      safeArea
+      safeAreaTop
       justifyContent="space-between"
       flex={1}
       _dark={{ bg: "blueGray.900" }}

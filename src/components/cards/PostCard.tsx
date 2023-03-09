@@ -11,6 +11,7 @@ import {
   Pressable,
 } from "native-base";
 import { Post } from "../../api/post/type";
+import {convertToLocalTime} from "../../utils/convertToLocalTime";
 
 interface Props {
   post: Post;
@@ -121,7 +122,7 @@ const PostCard = ({ post, onPress }: Props) => {
                 }}
                 fontWeight="400"
               >
-                {publishedDate}
+                {convertToLocalTime(publishedDate)}
               </Text>
             </HStack>
           </HStack>
