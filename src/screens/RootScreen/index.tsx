@@ -1,69 +1,63 @@
+import { useNavigation } from "@react-navigation/native";
 import {
-  Box,
-  Center,
-  Heading,
   HStack,
-  Link,
   Switch,
   Text,
   useColorMode,
   VStack,
   ScrollView,
-  View,
 } from "native-base";
 import React from "react";
 import { usePosts } from "../../api/post/query";
-import NativeBaseIcon from "../../components/NativeBaseIcon";
+import { Post } from "../../api/post/type";
 import PostCard from "../../components/cards/PostCard";
-import { Post } from "../../api/post";
 import BottomTab from "../../components/layout/BottomTab";
 
-export default function RootScreen() {
+const RootScreen = () => {
   const { data } = usePosts();
+  const navigation = useNavigation();
 
   if (!data) return null;
+
+  const dataWithThumbnail = data.filter((e: Post) => !!e.thumbnail);
+
+  const handlePress = (url: string) => {
+    // @ts-ignore
+    navigation.navigate("WebView", { url });
+  };
+
   return (
-    <Center w="100%" height="100%">
+    <VStack
+      w="100%"
+      h="100%"
+      safeAreaTop
+      justifyContent="space-between"
+      flex={1}
+      _dark={{ bg: "blueGray.900" }}
+      _light={{ bg: "blueGray.50" }}
+    >
       <ScrollView
         _dark={{ bg: "blueGray.900" }}
         _light={{ bg: "blueGray.50" }}
         px={4}
+        pt={4}
         flex={1}
       >
-        <VStack space={3} alignItems="center" safeArea>
-          {data.slice(0, 3).map((e: Post) => (
-            <PostCard post={e} key={e.title} />
+        <VStack space={5} alignItems="center" mx={1}>
+          {dataWithThumbnail.slice(0, 10).map((e: Post) => (
+            <PostCard
+              post={e}
+              key={e.title}
+              onPress={() => handlePress(e.link)}
+            />
           ))}
-          {/*<HStack space={2} alignItems="center">*/}
-          {/*  <Text>Edit</Text>*/}
-          {/*  <Box*/}
-          {/*    _web={{*/}
-          {/*      _text: {*/}
-          {/*        fontFamily: "monospace",*/}
-          {/*        fontSize: "sm",*/}
-          {/*      },*/}
-          {/*    }}*/}
-          {/*    px={2}*/}
-          {/*    py={1}*/}
-          {/*    _dark={{ bg: "blueGray.800" }}*/}
-          {/*    _light={{ bg: "blueGray.200" }}*/}
-          {/*  >*/}
-          {/*    App.js*/}
-          {/*  </Box>*/}
-          {/*  <Text>and save to reload.</Text>*/}
-          {/*</HStack>*/}
-          {/*<Link href="https://docs.nativebase.io" isExternal>*/}
-          {/*  <Text color="primary.500" underline fontSize={"xl"}>*/}
-          {/*    Learn NativeBase*/}
-          {/*  </Text>*/}
-          {/*</Link>*/}
           <ToggleDarkMode />
         </VStack>
       </ScrollView>
       <BottomTab />
-    </Center>
+    </VStack>
   );
-}
+};
 
 // Color Switch Component
 function ToggleDarkMode() {
@@ -82,3 +76,5 @@ function ToggleDarkMode() {
     </HStack>
   );
 }
+
+export default RootScreen;

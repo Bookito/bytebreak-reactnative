@@ -1,21 +1,10 @@
 import React from "react";
-import {
-  Text,
-  Link,
-  HStack,
-  Center,
-  Heading,
-  Switch,
-  useColorMode,
-  NativeBaseProvider,
-  extendTheme,
-  VStack,
-  Box,
-} from "native-base";
-import NativeBaseIcon from "./src/components/NativeBaseIcon";
-import { usePosts } from "./src/api/post/query";
+import { NativeBaseProvider, extendTheme } from "native-base";
 import { QueryCache, QueryClient, QueryClientProvider } from "react-query";
 import RootScreen from "./src/screens/RootScreen";
+import WebViewScreen from "./src/screens/WebViewScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // Define the config
 const config = {
@@ -41,11 +30,31 @@ const queryClient = new QueryClient({
   },
 });
 
+export type RootStackParamList = {
+  Root: undefined;
+  WebView: { url: string };
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <NativeBaseProvider>
-        <RootScreen />
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Root"
+              component={RootScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="WebView"
+              component={WebViewScreen}
+              initialParams={{ url: "" }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
       </NativeBaseProvider>
     </QueryClientProvider>
   );
