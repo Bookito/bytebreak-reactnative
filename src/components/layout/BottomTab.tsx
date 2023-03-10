@@ -1,15 +1,22 @@
 import React from "react";
 import { Box, Text, Icon, HStack, Pressable, VStack } from "native-base";
 import { FontAwesome5 } from "@expo/vector-icons";
+import LogoIcon from "../icons/LogoIcon";
 
-const ICON_COLOR = "warmGray.500"
-const LABEL_COLOR = "warmGray.500"
+const ICON_COLOR = "warmGray.500";
+const LABEL_COLOR = "warmGray.500";
 
 const BottomTab = () => {
   const [selected, setSelected] = React.useState(1);
 
   return (
-    <Box width="100%" alignSelf="center" shadow={6} bgColor="white" safeAreaBottom={3}>
+    <Box
+      width="100%"
+      alignSelf="center"
+      shadow={6}
+      bgColor="white"
+      safeAreaBottom={3}
+    >
       <HStack bg="white" alignItems="center">
         <Pressable
           opacity={selected === 0 ? 1 : 0.5}

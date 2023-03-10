@@ -14,6 +14,7 @@ import { Post } from "../../api/post/type";
 import BottomTab from "../../components/layout/BottomTab";
 import CarouselSection from "./CarouselSection";
 import ListCard from "../../components/cards/ListCard";
+import AppBar from "../../components/layout/AppBar";
 
 const RootScreen = () => {
   const { data } = usePosts();
@@ -38,6 +39,7 @@ const RootScreen = () => {
       _dark={{ bg: "blueGray.900" }}
       _light={{ bg: "blueGray.50" }}
     >
+      <AppBar />
       <ScrollView
         _dark={{ bg: "blueGray.900" }}
         _light={{ bg: "blueGray.50" }}
@@ -65,7 +67,6 @@ const RootScreen = () => {
                 ))}
               </HStack>
             ))}
-          <ToggleDarkMode />
         </VStack>
       </ScrollView>
       <BottomTab />
@@ -74,21 +75,5 @@ const RootScreen = () => {
 };
 
 // Color Switch Component
-function ToggleDarkMode() {
-  const { colorMode, toggleColorMode } = useColorMode();
-  return (
-    <HStack space={2} alignItems="center">
-      <Text>Dark</Text>
-      <Switch
-        isChecked={colorMode === "light"}
-        onToggle={toggleColorMode}
-        aria-label={
-          colorMode === "light" ? "switch to dark mode" : "switch to light mode"
-        }
-      />
-      <Text>Light</Text>
-    </HStack>
-  );
-}
 
 export default RootScreen;
