@@ -12,6 +12,7 @@ import { usePosts } from "../../api/post/query";
 import { Post } from "../../api/post/type";
 import PostCard from "../../components/cards/PostCard";
 import BottomTab from "../../components/layout/BottomTab";
+import CarouselSection from "./CarouselSection";
 
 const RootScreen = () => {
   const { data } = usePosts();
@@ -44,6 +45,7 @@ const RootScreen = () => {
         flex={1}
       >
         <VStack space={5} alignItems="center" mx={1}>
+          <CarouselSection dataWithThumbnail={dataWithThumbnail} />
           {dataWithThumbnail.slice(0, 10).map((e: Post) => (
             <PostCard
               post={e}

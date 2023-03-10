@@ -11,7 +11,7 @@ import {
   Pressable,
 } from "native-base";
 import { Post } from "../../api/post/type";
-import {convertToLocalTime} from "../../utils/convertToLocalTime";
+import { convertToLocalTime } from "../../utils/convertToLocalTime";
 
 interface Props {
   post: Post;
