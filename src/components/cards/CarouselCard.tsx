@@ -18,7 +18,7 @@ interface Props {
   onPress: () => void;
 }
 
-const PostCard = ({ post, onPress }: Props) => {
+const CarouselCard = ({ post, onPress }: Props) => {
   const { title, blogName, link, thumbnail, publishedDate, postOwner } = post;
 
   const logos = {
@@ -27,11 +27,6 @@ const PostCard = ({ post, onPress }: Props) => {
     Meta: "https://cdn.pixabay.com/photo/2017/06/22/06/22/facebook-2429746_640.png",
     Instagram:
       "https://cdn.pixabay.com/photo/2016/08/09/17/52/instagram-1581266_960_720.jpg",
-  };
-
-  const thumbnails = {
-    LinkedIn:
-      "https://cdn.pixabay.com/photo/2018/06/28/22/10/linkedin-3504899_640.jpg",
   };
 
   const defaultThumbnail = thumbnail
@@ -131,7 +126,7 @@ const PostCard = ({ post, onPress }: Props) => {
       <Avatar
         position="absolute"
         right="16px"
-        top="172px"
+        top="195px"
         borderWidth="4px"
         source={{
           uri: "https://cdn.pixabay.com/photo/2017/01/19/09/11/logo-google-1991840_640.png",
@@ -153,4 +148,4 @@ const PostCard = ({ post, onPress }: Props) => {
   );
 };
 
-export default PostCard;
+export default CarouselCard;

@@ -15,10 +15,10 @@ import { convertToLocalTime } from "../../utils/convertToLocalTime";
 
 interface Props {
   post: Post;
-  onPress: () => void;
+  onPress: (url: string) => void;
 }
 
-const PostCard = ({ post, onPress }: Props) => {
+const ListCard = ({ post, onPress }: Props) => {
   const { title, blogName, link, thumbnail, publishedDate, postOwner } = post;
 
   const logos = {
@@ -43,9 +43,9 @@ const PostCard = ({ post, onPress }: Props) => {
   return (
     <Pressable
       alignItems="center"
-      w="100%"
+      w="50%"
       position="relative"
-      onPress={onPress}
+      onPress={() => onPress(link)}
     >
       <Box
         w="100%"
@@ -77,26 +77,10 @@ const PostCard = ({ post, onPress }: Props) => {
         </Box>
         <Stack p="4" space={3}>
           <Stack space={2}>
-            <Heading size="md" ml="-1">
+            <Heading size="sm" ml="-1" numberOfLines={2}>
               {title}
             </Heading>
-            <HStack alignItems="center" space={3} maxW="100%">
-              {!!postOwner && (
-                <Text
-                  fontSize="xs"
-                  _light={{
-                    color: "violet.500",
-                  }}
-                  _dark={{
-                    color: "violet.400",
-                  }}
-                  fontWeight="500"
-                  ml="-0.5"
-                  mt="-1"
-                >
-                  {postOwner}
-                </Text>
-              )}
+            <HStack justifyContent="space-between" alignItems="center">
               <Text
                 fontSize="xs"
                 _light={{
@@ -105,17 +89,12 @@ const PostCard = ({ post, onPress }: Props) => {
                 _dark={{
                   color: "violet.400",
                 }}
-                fontWeight="500"
-                ml="-0.5"
-                mt="-1"
+                fontWeight="400"
               >
                 {blogName}
               </Text>
-            </HStack>
-          </Stack>
-          <HStack alignItems="center" space={4} justifyContent="space-between">
-            <HStack alignItems="center">
               <Text
+                fontSize="xs"
                 color="coolGray.600"
                 _dark={{
                   color: "warmGray.200",
@@ -125,13 +104,14 @@ const PostCard = ({ post, onPress }: Props) => {
                 {convertToLocalTime(publishedDate)}
               </Text>
             </HStack>
-          </HStack>
+          </Stack>
         </Stack>
       </Box>
       <Avatar
+        size="sm"
         position="absolute"
-        right="16px"
-        top="172px"
+        right="12px"
+        top="82px"
         borderWidth="4px"
         source={{
           uri: "https://cdn.pixabay.com/photo/2017/01/19/09/11/logo-google-1991840_640.png",
@@ -153,4 +133,4 @@ const PostCard = ({ post, onPress }: Props) => {
   );
 };
 
-export default PostCard;
+export default ListCard;
