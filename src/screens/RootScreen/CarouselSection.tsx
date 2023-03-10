@@ -27,7 +27,7 @@ const CarouselSection = ({ dataWithThumbnail, handlePress }: Props) => {
   };
 
   return (
-    <Box alignItems="center" mx={1} mb={3} flexShrink={0} height={350}>
+    <Box alignItems="center" mx={1} flexShrink={0} height={350}>
       <Carousel
         {...baseOptions}
         loop
@@ -37,7 +37,7 @@ const CarouselSection = ({ dataWithThumbnail, handlePress }: Props) => {
           (progressValue.value = absoluteProgress)
         }
         mode="parallax"
-        data={[...dataWithThumbnail.slice(0, 3)]}
+        data={[...dataWithThumbnail]}
         renderItem={({ item }: CarouselItem) => (
           <CarouselCard
             post={item}
