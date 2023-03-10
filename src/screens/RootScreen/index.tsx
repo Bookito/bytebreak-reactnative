@@ -8,6 +8,9 @@ import CarouselSection from "./CarouselSection";
 import ListCard from "../../components/cards/ListCard";
 import AppBar from "../../components/layout/AppBar";
 import CompanyButton from "../../components/buttons/CompanyButton";
+import { COMPANY_LIST } from "../../constants/constants";
+import shuffle from "../../utils/shuffle";
+import { NUMBER_OF_CAROUSEL } from "../../constants/controller";
 
 const RootScreen = () => {
   const { data } = usePosts();
@@ -41,7 +44,7 @@ const RootScreen = () => {
         flex={1}
       >
         <CarouselSection
-          dataWithThumbnail={dataWithThumbnail}
+          dataWithThumbnail={dataWithThumbnail.slice(0, NUMBER_OF_CAROUSEL)}
           handlePress={handlePress}
         />
         <HStack alignItems="center" justifyContent="center" mt={4}>
@@ -57,16 +60,14 @@ const RootScreen = () => {
           horizontal={true}
         >
           <HStack space={2} alignItems="center">
-            <CompanyButton company="AWS" />
-            <CompanyButton company="Google" />
-            <CompanyButton company="Microsoft" />
-            <CompanyButton company="Uber" />
-            <CompanyButton company="LinkedIn" />
+            {shuffle(COMPANY_LIST).map((company) => (
+              <CompanyButton company={company} key={company} />
+            ))}
           </HStack>
         </ScrollView>
         <VStack space={5} alignItems="center" mx={1} mt={4} mb={12}>
           {dataWithThumbnail
-            .slice(3, 11)
+            .slice(0, 9)
             .reduce<Post[][]>((pairs, e, i, arr) => {
               if (i % 2 === 0) {
                 pairs.push(arr.slice(i, i + 2));

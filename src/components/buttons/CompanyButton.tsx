@@ -36,6 +36,21 @@ const CompanyButton = ({ company }: Props) => {
       borderColor = "#0077B5";
       shadowColor = "#005C8E";
       break;
+    case "Twitter":
+      bgColor = "#1DA1F2";
+      borderColor = "#1DA1F2";
+      shadowColor = "#1A91DA";
+      break;
+    case "Line":
+      bgColor = "#00C300";
+      borderColor = "#00C300";
+      shadowColor = "#009E00";
+      break;
+    case "Meta":
+      bgColor = "#1877F2";
+      borderColor = "#1877F2";
+      shadowColor = "#0F5FBA";
+      break;
     default:
       bgColor = null;
       borderColor = null;
