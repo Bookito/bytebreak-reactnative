@@ -51,7 +51,7 @@ const RootScreen = () => {
         />
         <VStack space={5} alignItems="center" mx={1}>
           {dataWithThumbnail
-            .slice(3, 9)
+            .slice(3, 11)
             .reduce<Post[][]>((pairs, e, i, arr) => {
               if (i % 2 === 0) {
                 pairs.push(arr.slice(i, i + 2));

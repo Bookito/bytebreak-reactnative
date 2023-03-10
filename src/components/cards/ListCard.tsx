@@ -80,24 +80,7 @@ const ListCard = ({ post, onPress }: Props) => {
             <Heading size="sm" ml="-1" numberOfLines={2}>
               {title}
             </Heading>
-            <HStack alignItems="center" space={3} maxW="60%">
-              {!!postOwner && (
-                <Text
-                  fontSize="xs"
-                  numberOfLines={2}
-                  _light={{
-                    color: "violet.500",
-                  }}
-                  _dark={{
-                    color: "violet.400",
-                  }}
-                  fontWeight="500"
-                  ml="-0.5"
-                  mt="-1"
-                >
-                  {postOwner}
-                </Text>
-              )}
+            <HStack justifyContent="space-between" alignItems="center">
               <Text
                 fontSize="xs"
                 _light={{
@@ -106,16 +89,10 @@ const ListCard = ({ post, onPress }: Props) => {
                 _dark={{
                   color: "violet.400",
                 }}
-                fontWeight="500"
-                ml="-0.5"
-                mt="-1"
+                fontWeight="400"
               >
                 {blogName}
               </Text>
-            </HStack>
-          </Stack>
-          <HStack alignItems="center" space={4} justifyContent="space-between">
-            <HStack alignItems="center">
               <Text
                 fontSize="xs"
                 color="coolGray.600"
@@ -127,7 +104,7 @@ const ListCard = ({ post, onPress }: Props) => {
                 {convertToLocalTime(publishedDate)}
               </Text>
             </HStack>
-          </HStack>
+          </Stack>
         </Stack>
       </Box>
       <Avatar
