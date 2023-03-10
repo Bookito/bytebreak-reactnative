@@ -2,9 +2,9 @@ import * as React from "react";
 import { Dimensions } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { Post } from "../../api/post/type";
-import PostCard from "../../components/cards/PostCard";
 import { useSharedValue } from "react-native-reanimated";
 import { Box } from "native-base";
+import CarouselCard from "../../components/cards/CarouselCard";
 
 interface CarouselItem {
   item: Post;
@@ -12,21 +12,22 @@ interface CarouselItem {
 
 interface Props {
   dataWithThumbnail: Post[];
+  handlePress: (url: string) => void;
 }
 
 const window = Dimensions.get("window");
 const PAGE_WIDTH = window.width;
 
-const CarouselSection = ({ dataWithThumbnail }: Props) => {
+const CarouselSection = ({ dataWithThumbnail, handlePress }: Props) => {
   const progressValue = useSharedValue<number>(0);
   const baseOptions = {
     vertical: false,
     width: PAGE_WIDTH,
-    height: PAGE_WIDTH * 0.6,
+    height: PAGE_WIDTH * 0.8,
   };
 
   return (
-    <Box>
+    <Box alignItems="center" mx={1} mb={3} flexShrink={0} height={350}>
       <Carousel
         {...baseOptions}
         loop
@@ -38,7 +39,11 @@ const CarouselSection = ({ dataWithThumbnail }: Props) => {
         mode="parallax"
         data={[...dataWithThumbnail.slice(0, 3)]}
         renderItem={({ item }: CarouselItem) => (
-          <PostCard post={item} key={item.title} onPress={() => {}} />
+          <CarouselCard
+            post={item}
+            key={item.title}
+            onPress={() => handlePress(item.link)}
+          />
         )}
       />
     </Box>

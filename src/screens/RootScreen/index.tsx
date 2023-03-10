@@ -6,13 +6,14 @@ import {
   useColorMode,
   VStack,
   ScrollView,
+  Box,
 } from "native-base";
 import React from "react";
 import { usePosts } from "../../api/post/query";
 import { Post } from "../../api/post/type";
-import PostCard from "../../components/cards/PostCard";
 import BottomTab from "../../components/layout/BottomTab";
 import CarouselSection from "./CarouselSection";
+import ListCard from "../../components/cards/ListCard";
 
 const RootScreen = () => {
   const { data } = usePosts();
@@ -44,15 +45,26 @@ const RootScreen = () => {
         pt={4}
         flex={1}
       >
+        <CarouselSection
+          dataWithThumbnail={dataWithThumbnail}
+          handlePress={handlePress}
+        />
         <VStack space={5} alignItems="center" mx={1}>
-          <CarouselSection dataWithThumbnail={dataWithThumbnail} />
-          {dataWithThumbnail.slice(0, 10).map((e: Post) => (
-            <PostCard
-              post={e}
-              key={e.title}
-              onPress={() => handlePress(e.link)}
-            />
-          ))}
+          {dataWithThumbnail
+            .slice(3, 9)
+            .reduce<Post[][]>((pairs, e, i, arr) => {
+              if (i % 2 === 0) {
+                pairs.push(arr.slice(i, i + 2));
+              }
+              return pairs;
+            }, [])
+            .map((pair, index) => (
+              <HStack key={index} space={5}>
+                {pair.map((e: Post) => (
+                  <ListCard post={e} key={e.title} onPress={handlePress} />
+                ))}
+              </HStack>
+            ))}
           <ToggleDarkMode />
         </VStack>
       </ScrollView>
