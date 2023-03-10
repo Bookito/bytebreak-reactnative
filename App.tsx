@@ -40,7 +40,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <NativeBaseProvider>
+      <NativeBaseProvider theme={theme}>
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen

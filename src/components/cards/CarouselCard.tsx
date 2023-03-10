@@ -75,7 +75,7 @@ const CarouselCard = ({ post, onPress }: Props) => {
             <Heading size="md" ml="-1">
               {title}
             </Heading>
-            <HStack alignItems="center" space={3} maxW="100%">
+            <HStack alignItems="center" justifyContent="space-between">
               {!!postOwner && (
                 <Text
                   fontSize="xs"
@@ -92,35 +92,8 @@ const CarouselCard = ({ post, onPress }: Props) => {
                   {postOwner}
                 </Text>
               )}
-              <Text
-                fontSize="xs"
-                _light={{
-                  color: "violet.500",
-                }}
-                _dark={{
-                  color: "violet.400",
-                }}
-                fontWeight="500"
-                ml="-0.5"
-                mt="-1"
-              >
-                {blogName}
-              </Text>
             </HStack>
           </Stack>
-          <HStack alignItems="center" space={4} justifyContent="space-between">
-            <HStack alignItems="center">
-              <Text
-                color="coolGray.600"
-                _dark={{
-                  color: "warmGray.200",
-                }}
-                fontWeight="400"
-              >
-                {convertToLocalTime(publishedDate)}
-              </Text>
-            </HStack>
-          </HStack>
         </Stack>
       </Box>
       <Avatar

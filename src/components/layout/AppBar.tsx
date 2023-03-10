@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  HStack,
-  IconButton,
-  Icon,
-  useColorMode,
-  Switch,
-  Text,
-  VStack,
-  Pressable,
-} from "native-base";
+import { HStack, Icon, useColorMode, Pressable } from "native-base";
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import LogoIcon from "../icons/LogoIcon";
 
@@ -19,8 +10,8 @@ const AppBar = () => {
       justifyContent="space-between"
       alignItems="center"
       w="100%"
-      _dark={{ bg: "blueGray.900" }}
-      _light={{ bg: "blueGray.50" }}
+      _dark={{ bg: "white" }}
+      _light={{ bg: "coolGray.800" }}
     >
       <LogoIcon size={9} />
       <ToggleButtonDarkMode />

@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Text, Icon, HStack, Pressable, VStack } from "native-base";
 import { FontAwesome5 } from "@expo/vector-icons";
-import LogoIcon from "../icons/LogoIcon";
 
 const ICON_COLOR = "warmGray.500";
 const LABEL_COLOR = "warmGray.500";
@@ -22,6 +21,7 @@ const BottomTab = () => {
           opacity={selected === 0 ? 1 : 0.5}
           py="2"
           flex={1}
+          alignItems="center"
           onPress={() => setSelected(0)}
         >
           <VStack alignItems="center">
@@ -41,6 +41,7 @@ const BottomTab = () => {
           opacity={selected === 1 ? 1 : 0.5}
           py="2"
           flex={1}
+          alignItems="center"
           onPress={() => setSelected(1)}
         >
           <VStack alignItems="center">
@@ -60,6 +61,7 @@ const BottomTab = () => {
           opacity={selected === 2 ? 1 : 0.6}
           py="2"
           flex={1}
+          alignItems="center"
           onPress={() => setSelected(2)}
         >
           <VStack alignItems="center">
@@ -79,6 +81,7 @@ const BottomTab = () => {
           opacity={selected === 3 ? 1 : 0.5}
           py="2"
           flex={1}
+          alignItems="center"
           onPress={() => setSelected(3)}
         >
           <VStack alignSelf="center">

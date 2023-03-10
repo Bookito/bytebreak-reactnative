@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { HStack, VStack, ScrollView } from "native-base";
+import { HStack, VStack, ScrollView, Text } from "native-base";
 import React from "react";
 import { usePosts } from "../../api/post/query";
 import { Post } from "../../api/post/type";
@@ -32,7 +32,7 @@ const RootScreen = () => {
       _dark={{ bg: "blueGray.900" }}
       _light={{ bg: "blueGray.50" }}
     >
-      <AppBar />
+      {/*<AppBar />*/}
       <ScrollView
         _dark={{ bg: "blueGray.900" }}
         _light={{ bg: "blueGray.50" }}
@@ -44,14 +44,27 @@ const RootScreen = () => {
           dataWithThumbnail={dataWithThumbnail}
           handlePress={handlePress}
         />
-        <HStack space={5} alignItems="center">
-          <CompanyButton company="AWS" />
-          <CompanyButton company="Google" />
-          <CompanyButton company="Microsoft" />
-          <CompanyButton company="Uber" />
-          <CompanyButton company="LinkedIn" />
+        <HStack alignItems="center" justifyContent="center" mt={4}>
+          <Text fontSize={20} fontWeight="bold">
+            Big Tech Insights
+          </Text>
         </HStack>
-        <VStack space={5} alignItems="center" mx={1}>
+        <ScrollView
+          _dark={{ bg: "blueGray.900" }}
+          _light={{ bg: "blueGray.50" }}
+          py={4}
+          flex={1}
+          horizontal={true}
+        >
+          <HStack space={2} alignItems="center">
+            <CompanyButton company="AWS" />
+            <CompanyButton company="Google" />
+            <CompanyButton company="Microsoft" />
+            <CompanyButton company="Uber" />
+            <CompanyButton company="LinkedIn" />
+          </HStack>
+        </ScrollView>
+        <VStack space={5} alignItems="center" mx={1} mt={4} mb={12}>
           {dataWithThumbnail
             .slice(3, 11)
             .reduce<Post[][]>((pairs, e, i, arr) => {
@@ -73,7 +86,5 @@ const RootScreen = () => {
     </VStack>
   );
 };
-
-// Color Switch Component
 
 export default RootScreen;
