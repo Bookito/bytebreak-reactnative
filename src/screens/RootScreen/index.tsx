@@ -1,13 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import {
-  HStack,
-  Switch,
-  Text,
-  useColorMode,
-  VStack,
-  ScrollView,
-  Box,
-} from "native-base";
+import { HStack, VStack, ScrollView } from "native-base";
 import React from "react";
 import { usePosts } from "../../api/post/query";
 import { Post } from "../../api/post/type";
@@ -15,6 +7,7 @@ import BottomTab from "../../components/layout/BottomTab";
 import CarouselSection from "./CarouselSection";
 import ListCard from "../../components/cards/ListCard";
 import AppBar from "../../components/layout/AppBar";
+import CompanyButton from "../../components/buttons/CompanyButton";
 
 const RootScreen = () => {
   const { data } = usePosts();
@@ -51,6 +44,13 @@ const RootScreen = () => {
           dataWithThumbnail={dataWithThumbnail}
           handlePress={handlePress}
         />
+        <HStack space={5} alignItems="center">
+          <CompanyButton company="AWS" />
+          <CompanyButton company="Google" />
+          <CompanyButton company="Microsoft" />
+          <CompanyButton company="Uber" />
+          <CompanyButton company="LinkedIn" />
+        </HStack>
         <VStack space={5} alignItems="center" mx={1}>
           {dataWithThumbnail
             .slice(3, 11)
