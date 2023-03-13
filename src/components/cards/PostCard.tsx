@@ -15,7 +15,7 @@ import { convertToLocalTime } from "../../utils/convertToLocalTime";
 
 interface Props {
   post: Post;
-  onPress: () => void;
+  onPress: (url: string) => void;
 }
 
 const PostCard = ({ post, onPress }: Props) => {
@@ -45,7 +45,7 @@ const PostCard = ({ post, onPress }: Props) => {
       alignItems="center"
       w="100%"
       position="relative"
-      onPress={onPress}
+      onPress={() => onPress(link)}
     >
       <Box
         w="100%"

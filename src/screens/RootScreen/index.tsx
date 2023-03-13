@@ -1,16 +1,17 @@
 import { useNavigation } from "@react-navigation/native";
-import { HStack, VStack, ScrollView, Text } from "native-base";
+import { HStack, VStack, ScrollView, Text, Button } from "native-base";
 import React from "react";
 import { usePosts } from "../../api/post/query";
 import { Post } from "../../api/post/type";
 import BottomTab from "../../components/layout/BottomTab";
-import CarouselSection from "./CarouselSection";
-import ListCard from "../../components/cards/ListCard";
 import AppBar from "../../components/layout/AppBar";
-import CompanyButton from "../../components/buttons/CompanyButton";
-import { COMPANY_LIST } from "../../constants/constants";
 import shuffle from "../../utils/shuffle";
+import CarouselSection from "./CarouselSection";
 import { NUMBER_OF_CAROUSEL } from "../../constants/controller";
+import CompanyButton from "../../components/buttons/CompanyButton";
+import ListCard from "../../components/cards/ListCard";
+import { COMPANY_LIST } from "../../constants/constants";
+import PostCard from "../../components/cards/PostCard";
 
 const RootScreen = () => {
   const { data } = usePosts();
@@ -66,21 +67,33 @@ const RootScreen = () => {
           </HStack>
         </ScrollView>
         <VStack space={5} alignItems="center" mx={1} mt={4} mb={12}>
-          {dataWithThumbnail
-            .slice(0, 9)
-            .reduce<Post[][]>((pairs, e, i, arr) => {
-              if (i % 2 === 0) {
-                pairs.push(arr.slice(i, i + 2));
-              }
-              return pairs;
-            }, [])
-            .map((pair, index) => (
-              <HStack key={index} space={5}>
-                {pair.map((e: Post) => (
-                  <ListCard post={e} key={e.title} onPress={handlePress} />
-                ))}
-              </HStack>
-            ))}
+          {/*{dataWithThumbnail*/}
+          {/*  .slice(0, 10)*/}
+          {/*  .reduce<Post[][]>((pairs, e, i, arr) => {*/}
+          {/*    if (i % 2 === 0) {*/}
+          {/*      pairs.push(arr.slice(i, i + 2));*/}
+          {/*    }*/}
+          {/*    return pairs;*/}
+          {/*  }, [])*/}
+          {/*  .map((pair, index) => (*/}
+          {/*    <HStack key={index} space={5}>*/}
+          {/*      {pair.map((e: Post) => (*/}
+          {/*        <ListCard post={e} key={e.title} onPress={handlePress} />*/}
+          {/*      ))}*/}
+          {/*    </HStack>*/}
+          {/*  ))}*/}
+          {dataWithThumbnail.slice(0, 10).map((e: Post) => (
+            <PostCard post={e} key={e.title} onPress={handlePress} />
+          ))}
+          <Button
+            w="100%"
+            borderRadius={16}
+            bg="purple.500"
+            _hover={{ bg: "purple.600" }}
+            color="white"
+          >
+            Load More
+          </Button>
         </VStack>
       </ScrollView>
       <BottomTab />
