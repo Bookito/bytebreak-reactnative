@@ -10,8 +10,8 @@ const AppBar = () => {
       justifyContent="space-between"
       alignItems="center"
       w="100%"
-      _dark={{ bg: "white" }}
-      _light={{ bg: "coolGray.800" }}
+      _light={{ bg: "blueGray.50" }}
+      _dark={{ bg: "coolGray.800" }}
     >
       <LogoIcon size={9} />
       <ToggleButtonDarkMode />

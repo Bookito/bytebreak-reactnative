@@ -1,12 +1,14 @@
 import React from "react";
 import { Box, Text, Icon, HStack, Pressable, VStack } from "native-base";
 import { FontAwesome5 } from "@expo/vector-icons";
+import LogoIcon from "../icons/LogoIcon";
 
 const ICON_COLOR = "warmGray.500";
 const LABEL_COLOR = "warmGray.500";
 
 const BottomTab = () => {
   const [selected, setSelected] = React.useState(1);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <Box
@@ -57,12 +59,15 @@ const BottomTab = () => {
             </Text>
           </VStack>
         </Pressable>
+        <Pressable flex={1} alignItems="center" onPress={() => setSelected(2)}>
+          <LogoIcon size={9} />
+        </Pressable>
         <Pressable
           opacity={selected === 2 ? 1 : 0.6}
           py="2"
           flex={1}
           alignItems="center"
-          onPress={() => setSelected(2)}
+          onPress={() => setSelected(3)}
         >
           <VStack alignItems="center">
             <Icon
@@ -82,7 +87,7 @@ const BottomTab = () => {
           py="2"
           flex={1}
           alignItems="center"
-          onPress={() => setSelected(3)}
+          onPress={() => setSelected(4)}
         >
           <VStack alignSelf="center">
             <Icon

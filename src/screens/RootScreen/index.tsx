@@ -1,16 +1,22 @@
 import { useNavigation } from "@react-navigation/native";
-import { HStack, VStack, ScrollView, Text } from "native-base";
+import { HStack, VStack, ScrollView, Text, Button, Center } from "native-base";
 import React from "react";
 import { usePosts } from "../../api/post/query";
 import { Post } from "../../api/post/type";
 import BottomTab from "../../components/layout/BottomTab";
-import CarouselSection from "./CarouselSection";
-import ListCard from "../../components/cards/ListCard";
 import AppBar from "../../components/layout/AppBar";
-import CompanyButton from "../../components/buttons/CompanyButton";
-import { COMPANY_LIST } from "../../constants/constants";
 import shuffle from "../../utils/shuffle";
+import CarouselSection from "./CarouselSection";
 import { NUMBER_OF_CAROUSEL } from "../../constants/controller";
+import CompanyButton from "../../components/buttons/CompanyButton";
+import ListCard from "../../components/cards/ListCard";
+import { COMPANY_LIST } from "../../constants/constants";
+import PostCard from "../../components/cards/PostCard";
+import LogoIcon from "../../components/icons/LogoIcon";
+
+import { Dimensions } from "react-native";
+
+export const SCREEN_WIDTH = Dimensions.get("window").width - 50;
 
 const RootScreen = () => {
   const { data } = usePosts();
@@ -31,59 +37,77 @@ const RootScreen = () => {
       h="100%"
       safeAreaTop
       justifyContent="space-between"
-      flex={1}
-      _dark={{ bg: "blueGray.900" }}
-      _light={{ bg: "blueGray.50" }}
+      _light={{ bg: "warmGray.100" }}
+      _dark={{ bg: "warmGray.800" }}
+      space={0}
     >
       {/*<AppBar />*/}
+      <Center px={4} pt={12} mb={8}>
+        {/*<LogoIcon size={20} />*/}
+        <Text fontSize="4xl" fontWeight="bold" color="warmGray.900">
+          Bookito
+        </Text>
+      </Center>
       <ScrollView
-        _dark={{ bg: "blueGray.900" }}
-        _light={{ bg: "blueGray.50" }}
-        px={4}
-        pt={4}
+        mb={8}
         flex={1}
+        w="100%"
+        _light={{ bg: "warmGray.100" }}
+        _dark={{ bg: "warmGray.800" }}
       >
+        <Center mb={2} pb={0}>
+          <Text
+            color="warmGray.800"
+            fontSize="md"
+            fontWeight="bold"
+            width={SCREEN_WIDTH}
+          >{`${NUMBER_OF_CAROUSEL} New Posts`}</Text>
+        </Center>
         <CarouselSection
           dataWithThumbnail={dataWithThumbnail.slice(0, NUMBER_OF_CAROUSEL)}
           handlePress={handlePress}
+          width={SCREEN_WIDTH}
         />
-        <HStack alignItems="center" justifyContent="center" mt={4}>
-          <Text fontSize={20} fontWeight="bold">
-            Big Tech Insights
-          </Text>
-        </HStack>
-        <ScrollView
-          _dark={{ bg: "blueGray.900" }}
-          _light={{ bg: "blueGray.50" }}
-          py={4}
-          flex={1}
-          horizontal={true}
-        >
-          <HStack space={2} alignItems="center">
-            {shuffle(COMPANY_LIST).map((company) => (
-              <CompanyButton company={company} key={company} />
-            ))}
-          </HStack>
-        </ScrollView>
-        <VStack space={5} alignItems="center" mx={1} mt={4} mb={12}>
-          {dataWithThumbnail
-            .slice(0, 9)
-            .reduce<Post[][]>((pairs, e, i, arr) => {
-              if (i % 2 === 0) {
-                pairs.push(arr.slice(i, i + 2));
-              }
-              return pairs;
-            }, [])
-            .map((pair, index) => (
-              <HStack key={index} space={5}>
-                {pair.map((e: Post) => (
-                  <ListCard post={e} key={e.title} onPress={handlePress} />
-                ))}
-              </HStack>
-            ))}
+        <VStack mt={4}>
+          <Center>
+            <Text
+              color="warmGray.800"
+              mb={1}
+              fontSize="md"
+              fontWeight="bold"
+              width={SCREEN_WIDTH}
+            >
+              Latest Posts
+            </Text>
+          </Center>
+          <Center>
+            <Text
+              color="warmGray.800"
+              mb={1}
+              fontSize="md"
+              fontWeight="bold"
+              width={SCREEN_WIDTH}
+            >
+              Recent Activity
+            </Text>
+            <VStack space={5} alignItems="center" mx={1} mt={4} mb={12}>
+              {dataWithThumbnail.slice(0, 10).map((e: Post) => (
+                <ListCard post={e} key={e.title} onPress={handlePress} />
+              ))}
+              <Button
+                w="100%"
+                borderRadius={16}
+                bg="purple.500"
+                _hover={{ bg: "purple.600" }}
+                color="white"
+              >
+                Load More
+              </Button>
+            </VStack>
+          </Center>
         </VStack>
       </ScrollView>
-      <BottomTab />
+      {/*<BottomTab />*/}
     </VStack>
   );
 };
