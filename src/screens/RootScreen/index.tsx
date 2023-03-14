@@ -1,5 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
-import { HStack, VStack, ScrollView, Text, Button, Center } from "native-base";
+import {
+  HStack,
+  VStack,
+  ScrollView,
+  Text,
+  Button,
+  Center,
+  Divider,
+} from "native-base";
 import React from "react";
 import { usePosts } from "../../api/post/query";
 import { Post } from "../../api/post/type";
@@ -68,6 +76,61 @@ const RootScreen = () => {
           handlePress={handlePress}
           width={SCREEN_WIDTH}
         />
+        <Center>
+          <Text
+            color="warmGray.800"
+            mb={3}
+            fontSize="md"
+            fontWeight="bold"
+            width={SCREEN_WIDTH}
+          >
+            Recent Activity
+          </Text>
+          <HStack
+            width={SCREEN_WIDTH}
+            bgColor="warmGray.200"
+            px={4}
+            py={6}
+            rounded={6}
+          >
+            <HStack>
+              <Divider
+                bg="emerald.500"
+                thickness="2"
+                mx="2"
+                orientation="vertical"
+              />
+              <VStack>
+                <Text>4</Text>
+                <Text>Today</Text>
+              </VStack>
+            </HStack>
+            <HStack>
+              <Divider
+                bg="emerald.500"
+                thickness="2"
+                mx="2"
+                orientation="vertical"
+              />
+              <VStack>
+                <Text>18</Text>
+                <Text>This week</Text>
+              </VStack>
+            </HStack>
+            <HStack>
+              <Divider
+                bg="emerald.500"
+                thickness="2"
+                mx="2"
+                orientation="vertical"
+              />
+              <VStack>
+                <Text>24</Text>
+                <Text>This Month</Text>
+              </VStack>
+            </HStack>
+          </HStack>
+        </Center>
         <VStack mt={4}>
           <Center>
             <Text
@@ -79,18 +142,14 @@ const RootScreen = () => {
             >
               Latest Posts
             </Text>
-          </Center>
-          <Center>
-            <Text
-              color="warmGray.800"
-              mb={1}
-              fontSize="md"
-              fontWeight="bold"
+            <VStack
+              space={5}
+              alignItems="center"
+              mx={1}
+              mt={4}
+              mb={12}
               width={SCREEN_WIDTH}
             >
-              Recent Activity
-            </Text>
-            <VStack space={5} alignItems="center" mx={1} mt={4} mb={12}>
               {dataWithThumbnail.slice(0, 10).map((e: Post) => (
                 <ListCard post={e} key={e.title} onPress={handlePress} />
               ))}
