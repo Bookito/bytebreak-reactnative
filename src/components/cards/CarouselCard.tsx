@@ -4,7 +4,7 @@ import {
   AspectRatio,
   Heading,
   HStack,
-  Stack,
+  VStack,
   Image,
   Text,
   Avatar,
@@ -41,27 +41,18 @@ const CarouselCard = ({ post, onPress }: Props) => {
       w="100%"
       position="relative"
       onPress={onPress}
+      shadow={6}
+      _dark={{
+        backgroundColor: "warmGray.50",
+      }}
+      _light={{
+        backgroundColor: "warmGray.50",
+      }}
+      rounded={15}
     >
-      <Box
-        w="100%"
-        rounded="lg"
-        overflow="hidden"
-        borderColor="coolGray.200"
-        borderWidth="1"
-        _dark={{
-          borderColor: "coolGray.600",
-          backgroundColor: "gray.700",
-        }}
-        _web={{
-          shadow: 2,
-          borderWidth: 0,
-        }}
-        _light={{
-          backgroundColor: "gray.50",
-        }}
-      >
+      <Box w="100%" rounded={15} overflow="hidden">
         <Box>
-          <AspectRatio w="100%" ratio={16 / 9}>
+          <AspectRatio w="100%" ratio={16 / 10}>
             <Image
               source={{
                 uri: defaultThumbnail,
@@ -70,51 +61,46 @@ const CarouselCard = ({ post, onPress }: Props) => {
             />
           </AspectRatio>
         </Box>
-        <Stack p="4" space={3}>
-          <Stack space={2}>
-            <Heading size="md" ml="-1">
-              {title}
-            </Heading>
-            <HStack alignItems="center" justifyContent="space-between">
-              {!!postOwner && (
-                <Text
-                  fontSize="xs"
-                  _light={{
-                    color: "violet.500",
-                  }}
-                  _dark={{
-                    color: "violet.400",
-                  }}
-                  fontWeight="500"
-                  ml="-0.5"
-                  mt="-1"
-                >
-                  {postOwner}
-                </Text>
-              )}
-            </HStack>
-          </Stack>
-        </Stack>
+        <VStack p={5} space={3} h="150px">
+          <Heading size="sm" ml="-1">
+            {title}
+          </Heading>
+          <HStack alignItems="center" justifyContent="space-between">
+            {!!postOwner && (
+              <Text
+                fontSize="xs"
+                _light={{
+                  color: "warmGray.700",
+                }}
+                _dark={{
+                  color: "warmGray.700",
+                }}
+                fontWeight="500"
+                ml="-0.5"
+                mt="-1"
+              >
+                {postOwner}
+              </Text>
+            )}
+          </HStack>
+        </VStack>
       </Box>
       <Avatar
         position="absolute"
-        right="16px"
+        right="12px"
         top="195px"
         borderWidth="4px"
+        size={10}
         source={{
           uri: "https://cdn.pixabay.com/photo/2017/01/19/09/11/logo-google-1991840_640.png",
         }}
         _dark={{
-          borderColor: "coolGray.600",
-          backgroundColor: "gray.700",
-        }}
-        _web={{
-          shadow: 2,
-          borderWidth: 0,
+          borderColor: "warmGray.600",
+          backgroundColor: "warmGray.700",
         }}
         _light={{
-          backgroundColor: "gray.50",
-          borderColor: "gray.50",
+          backgroundColor: "warmGray.50",
+          borderColor: "warmGray.50",
         }}
       />
     </Pressable>
